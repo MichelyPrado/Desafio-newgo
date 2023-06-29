@@ -35,6 +35,7 @@ public class Motor {
 Nesse exemplo, em vez de criar uma classe "Carro" que herda de uma classe "Veiculo", utilizamos composição para incluir um objeto "Motor" dentro da classe "Carro". Dessa forma, a classe "Carro" pode utilizar as funcionalidades do motor por meio de chamadas de métodos, delegando as operações necessárias ao objeto "Motor".
 
 
+
 2. Suponha que você tem uma classe final, da qual você não tem o código-fonte, e que você deseja adicioná-la a uma estrutura de polimorfismo, mas cuja interface pública é ligeiramente diferente da classe. Que padrão de projeto você poderia utilizar para aproveitar o código desta classe, mas fazendo com que ela atenda à interface da esperada na estrutura de polimorfismo?
 
 Nessa situação,  seria possível fazer uso de um padrão de projeto Adaptador (Adapter). Porque ele permitiria envolver uma classe existente com uma nova interface, podendo ser utilizada em um contexto diferente sem modificar seu código-fonte original.
@@ -47,6 +48,7 @@ IV. Nos métodos do Adaptador, utilizar os métodos da classe final para realiza
 Assim, o Adaptador poderá ser usado como se fosse uma instância da interface desejada, aproveitando o código da classe final sem precisar modificá-la.
 
 
+
 3. Em que cenários você poderia usar um proxy? Dê um exemplo real.
 
 Em cenários onde é necessário fazer o controle de acesso a um objeto ou fornecer funcionalidaes adicionais como acesso remoto, inicialização tardia, logging, cache, entre outros.
@@ -56,6 +58,7 @@ Acesso remoto: Quando você precisa acessar um objeto remoto, como um serviço w
 
 Um exemplo real de uso desse padrão é um proxy de imagens em um aplicativo web. 
 Suponha que você esteja construindo um site que exiba várias imagens. Em vez de carregar todas as imagens de uma vez, você pode usar um proxy de imagem. Ele seria responsável por carregar as imagens somente quando elas são realmente necessárias, em vez de carregá-las todas de uma vez. Além disso, o proxy pode implementar recursos de cache para armazenar as imagens já carregadas, evitando o carregamento repetido e pode também pode lidar com casos em que as imagens não estão disponíveis ou fornecer uma versão substituta em caso de falha de carregamento.
+
 
 
 4. Você prefere utilizar domínios anêmicos ou ricos? Como avalia os prós e contras de cada?
@@ -79,6 +82,7 @@ Contras:
 Complexidade: À medida que as classes de domínio se tornam mais ricas em comportamento, a complexidade do código pode aumentar e o domínio rico pode exigir mais tempo e esforço para entender e desenvolver, especialmente para desenvolvedores menos familiarizados com o domínio do problema.
 
 
+
 5. Dê um exemplo do bom uso do princípio OCP, da sigla SOLID.
 
 S.O.L.I.D: Os 5 princípios da POO:
@@ -87,22 +91,20 @@ O — Open-Closed Principle (Princípio Aberto-Fechado)
 L — Liskov Substitution Principle (Princípio da substituição de Liskov)
 I — Interface Segregation Principle (Princípio da Segregação da Interface)
 D — Dependency Inversion Principle (Princípio da inversão da dependência)
-
 Esses princípios ajudam o programador a escrever códigos mais limpos, separando responsabilidades, diminuindo acoplamentos, facilitando na refatoração e estimulando o reaproveitamento do código.
 
 OCP: Open-Closed Principle (Princípio Aberto-Fechado)
 Desenvolvimento de softwares, objetos ou entidades devem estar abertos para extensão, mas fechados para modificação, ou seja, quando novos comportamentos e recursos precisam ser adicionados no software, devemos estender e não alterar o código fonte original.
-
 Um caso que pode ser exemplificado seria o desenvolvimento de um sistema de processamento financeiro que precisa lidar com diferentes tipos de pagamentos, como cartão de crédito, transferência bancária e PayPal. Você deseja garantir que o sistema seja flexível para permitir a adição de novos tipos de pagamento no futuro sem precisar modificar o código existente.
 Em vez de implementar diretamente a lógica de processamento de pagamentos dentro de uma única classe, você pode seguir o princípio OCP usando uma abordagem baseada em interfaces e implementações específicas para cada tipo de pagamento. 
 Poderia ser criada uma interface "Pagamento" que define o contrato para o processamento de pagamentos e algumas implementações necessárias pra cada tipo específico (crédito, pix, PayPal), cada uma com sua própria lógica para processar o respectivo tipo de pagamento. Quando for necessário adicionar uma nova forma de pagamento basta criar uma nova implementação da interface "Pagamento" com a lógica específica para esse tipo. O restante do código existente não precisa ser modificado, pois ele já está aberto para extensão através da interface Pagamento.
 Isso permite que você adicione facilmente novos tipos de pagamento ao sistema sem afetar o código existente, seguindo o princípio OCP.
 
 
+
 6. Qual é a diferença entre requisitos funcionais, não-funcionais e regras de negócio. Dê um exemplo de cada.
 
 São termos comuns da engenharia de software para descrever diferentes tipos de necessidades de um sistema.
-
 Os requisitos funcionais descrevem as funcionalidades, ações e os comportamentos específicos que o sistema deve realizar. Eles definem o que o sistema deve fazer para atender às necessidades e expectativas dos usuários e estão relacionados diretamente com as operações e ações do sistema. 
 Alguns exemplos de requisitos funcionais em um sistema de vendas online podem ser:
 - O sistema deve permitir que os usuários adicionem itens ao carrinho de compras.
@@ -119,14 +121,15 @@ Exemplos de regras de negócio podem incluir:
 - Um cliente só pode fazer uma compra se estiver registrado no sistema.
 - O desconto de um produto não pode exceder 20% do preço original.
 - Um usuário não pode alterar suas informações pessoais após o envio do pedido.
-
 É importante compreender e documentar adequadamente os requisitos funcionais, não funcionais e as regras de negócio para garantir que o sistema seja desenvolvido de acordo com as necessidades e expectativas dos usuários e com os padrões e requisitos estabelecidos pela organização.
+
 
 
 7. Quais estratégias de diagramação você utiliza em seus projetos? Quais diagramas e por quê?
 
 Eu ainda não fiz nenhum projeto em Java, mas sei que que os diagramas são ferramentas de comunicação e documentação, utilizados para melhorar a compreensão e a colaboração entre a equipe de desenvolvimento do projeto e essa escolha vai depender das necessidades específicas de cada projeto, do estágio de desenvolvimento e das áreas de foco, como estrutura, comportamento, arquitetura ou interação. 
 Considero importante o diagrama de classes porque é fundamental para modelar as classes e relacionamentos no sistema. Ele representa as classes, interfaces, atributos, métodos e suas relações, como associações, heranças e implementações, ajuda a visualizar a estrutura do sistema, identificar as classes principais e suas interações, e auxiliar no design da arquitetura orientada a objetos.
+
 
 
 8. Você está utilizando GitFlow e precisa fazer uma alteração na versão em desenvolvimento de um projeto. Quais etapas você teria que realizar?
@@ -144,15 +147,14 @@ Considero importante o diagrama de classes porque é fundamental para modelar as
 6- Concluir a feature e mesclar as alterações no branch de desenvolvimento (comando git flow feature finish <nome-da-feature>)
 
 7- Sincronizar a branch e garantir a atualização dela (comando git pull origin develop para obter as últimas alterações do repositório remoto)
-
 Após concluir a alteração e sincronizar o branch de desenvolvimento, é só continuar trabalhando nele para adicionar mais funcionalidades ou correções.
+
 
 
 9. O que você deve ter feito para que uma funcionalidade que você pegou para implementar seja considerada como 'done'?
 
 É recomendado seguir um protocolo de boas práticas comuns de desenvolvimento de software e garantir que a funcionalidade seja testada, revisada, documentada e validada de acordo com as diretrizes e os padrões estabelecidos pela equipe.
 Eis alguns pontos importantes a se considerar:
-
 - Implementação do código de acordo com os requisitos e especificações estabelecidos: sintaxe correta e um código escrito corretamente, seguindo boas práticas de programação e que seja de fácil manutenção. 
 - Testar a funcionalidade adequadamente sempre que possível fazendo testes unitários que cubram cenários de testes relevantes.
 - Manter uma integração contínua do código, onde ele é compilado, testado e verificado automaticamente. Isso ajuda a identificar problemas o mais cedo possível e manter a qualidade do código.
@@ -160,6 +162,7 @@ Eis alguns pontos importantes a se considerar:
 - Manter a documentação técnica atualizada daquele código, seja com javadocs, comentários no código ou até mesmo criar uma documentação do usuário. A documentação clara e precisa é importante para ajudar outros desenvolvedores a entenderem e utilizarem a funcionalidade.
 - Quando pertinente, fazer testes de aceitação ou testes de sistema para verificar se a funcionalidade atende aos requisitos do usuário final, especialistas no domínio ou pela equipe de controle de qualidade.
 - Finalmente a implantação da funcionalidade em ambiente de produção. Verificando se a implantação foi realizada com sucesso e se a funcionalidade está performando corretamente no ambiente de destino.
+
 
 
 10. Quais são as cerimônias do SCRUM e como você avalia a importância de cada?
@@ -179,10 +182,10 @@ A primeira é a Sprint Review (Revisão da Sprint), onde o time inteiro revisa a
 A segunda é a Sprint Retrospective (Retrospectiva da Sprint)  onde o time verifica as ações tomadas durante o processo, se foram corretas e o que pode ser melhorado para os próximos ciclos. Essa cerimônia é essencial para promover a aprendizagem contínua, aprimorar o processo de trabalho e fortalecer a colaboração e o trabalho em equipe.
 
 
+
 11. Você conhece e utiliza Docker nos seus projetos? Se sim, para que?
 
 Eu nunca utilizei essa ferramenta, mas fiz uma pesquisa a respeito e entendi que é uma forma de "transportar" meu software do ambiente de desenvolvimente para a Produção propriamente dita.
-
 E pra realizar este "transporte", preciso garantir que o ambiente de Produção tenha todos os pré-requisitos instalados, de preferência uma versão do S.O. parecida com a do ambiente de Desenvolvimento entre outros cuidados que devem ser tomados (relacionados a permissionamento, serviços dependentes e etc...).
 
 Com o Docker temos um container com nosso software. Esse container é levado inteiro para o outro ambiente.
