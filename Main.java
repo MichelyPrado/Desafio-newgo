@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+//importando as classes do pacote java.util que serão usadas pra armazenar arquivos dentro da classe Pasta
 
 class Arquivo {
     private String nome;
@@ -13,9 +14,13 @@ class Arquivo {
     }
 
     public long getTamanho() {
+        System.out.println("Nome do arquivo: " + nome);
+        System.out.println("Tipo do arquivo: " + tipo);
         return tamanho;
     }
 }
+//definição da classe Arquivo (representa um arquivo dentro do disco virtual)
+//o construtor Arquivo inicializa os atributos e possui o método getTamanho() que retorna o tamanho do arquivo
 
 class Pasta {
     private String nome;
@@ -37,6 +42,9 @@ class Pasta {
         Arquivo arquivo = new Arquivo(nome, tipo, tamanho);
         arquivos.add(arquivo);
     }
+    //definição da classe Pasta, a lista "subpastas" armazena os arquivos ali contidos
+    //o construtor Pasta inicializa os atributos da classe
+    //os métodos permitem adicionar subpastas e arquivos e criam os objetos "Pasta" e "Arquivo"
 
     public long calcularTamanho() {
         long tamanhoTotal = 0;
@@ -57,6 +65,8 @@ class Pasta {
         arquivos.clear();
     }
 }
+//método "calcularTamanho()" calcula o tamanho total da pasta (com chamada recursiva)
+//método "excluir()" é responsável por excluir as pastas e subpastas (também de forma recursiva)
 
 class Disco {
     private String nome;
@@ -65,6 +75,10 @@ class Disco {
     public Disco(String nome) {
         this.nome = nome;
         this.raiz = new Pasta("Raiz");
+    }
+
+    public String getNome() {
+        return nome;
     }
 
     public void criarPasta(String nome) {
@@ -82,7 +96,15 @@ class Disco {
     public void excluir() {
         raiz.excluir();
     }
+
+    public Pasta getRaiz() {
+        return raiz;
+    }
 }
+
+// a classe Disco representa o disco virtual (com atributo "nome" e objeto "Pasta" com nome "raiz")
+//os métodos são chamados na pasta raiz e fornecem um ponto de entrada 
+//pra calcular o tamanho total e exclusão recursiva de todos os elementos
 
 public class Main {
     public static void main(String[] args) {
@@ -109,3 +131,6 @@ public class Main {
         documents.excluir();
     }
 }
+//na main o disco virtual é de fato usado criando um objeto Disco chamado "gdrive"
+//em seguida é calculado o tamanho total da pasta "Documents" e o resultado é printado na saída
+//Documents e suas subpastas são excluídos
