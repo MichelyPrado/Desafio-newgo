@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
-//importando as classes do pacote java.util que serão usadas pra armazenar arquivos dentro da classe Pasta
+
+//importação das listas do pacote java.util (usadas no código)
 
 class Arquivo {
     private String nome;
@@ -19,8 +20,9 @@ class Arquivo {
         return tamanho;
     }
 }
-//definição da classe Arquivo (representa um arquivo dentro do disco virtual)
-//o construtor Arquivo inicializa os atributos e possui o método getTamanho() que retorna o tamanho do arquivo
+
+//classe Arquivo e construtor Arquivo (que inicializa os atributos do objeto)
+//o método "getTamanho()" retorna o tamanho do arquivo e imprime nome e tipo
 
 class Pasta {
     private String nome;
@@ -42,9 +44,6 @@ class Pasta {
         Arquivo arquivo = new Arquivo(nome, tipo, tamanho);
         arquivos.add(arquivo);
     }
-    //definição da classe Pasta, a lista "subpastas" armazena os arquivos ali contidos
-    //o construtor Pasta inicializa os atributos da classe
-    //os métodos permitem adicionar subpastas e arquivos e criam os objetos "Pasta" e "Arquivo"
 
     public long calcularTamanho() {
         long tamanhoTotal = 0;
@@ -64,9 +63,24 @@ class Pasta {
         subpastas.clear();
         arquivos.clear();
     }
+
+    public Pasta getSubpasta(String nome) {
+        for (Pasta subpasta : subpastas) {
+            if (subpasta.nome.equals(nome)) {
+                return subpasta;
+            }
+        }
+        return null;
+    }
 }
-//método "calcularTamanho()" calcula o tamanho total da pasta (com chamada recursiva)
-//método "excluir()" é responsável por excluir as pastas e subpastas (também de forma recursiva)
+
+//classe Pasta (representa uma pasta, subpastas e arquivos), construtor Pasta (inicializa os atributos da pasta)
+//métodos responsáveis pela criação de Pasta e Arquivo
+//método calcularTamanho percorre de maneira recursiva todas as pastas e arquivos calculando o tamanho total da pasta
+//método excluir remove todas as pastas e arquivos 
+//método getSubpasta busca subpastas pelo nome dentro da lista de subpastas da pasta atual
+//recebe um nome como parâmetro e compara com a variável "subpasta"
+//se encontrar uma subpasta com o nome desejado retorna ela, se não encontrar retorna null
 
 class Disco {
     private String nome;
@@ -102,33 +116,31 @@ class Disco {
     }
 }
 
-// a classe Disco representa o disco virtual (com atributo "nome" e objeto "Pasta" com nome "raiz")
-//os métodos são chamados na pasta raiz e fornecem um ponto de entrada 
-//pra calcular o tamanho total e exclusão recursiva de todos os elementos
+//classe que representa o Disco contendo uma pasta raiz
+//método "getRaiz" retorna a pasta raiz
 
 public class Main {
     public static void main(String[] args) {
         Disco gdrive = new Disco("GDrive");
 
-        // Criar pastas
         gdrive.criarPasta("Documents");
         gdrive.criarPasta("Pictures");
 
-        // Criar subpastas
         Pasta documents = gdrive.getRaiz().getSubpasta("Documents");
-        documents.criarPasta("Work");
-        documents.criarPasta("Personal");
+        if (documents != null) {
+            documents.criarPasta("Work");
+            documents.criarPasta("Personal");
 
-        // Criar arquivos
-        documents.criarArquivo("Report.docx", "Documento", 1024);
-        documents.criarArquivo("Image.jpg", "Imagem", 2048);
+            documents.criarArquivo("Report.docx", "Documento", 1024);
+            documents.criarArquivo("Image.jpg", "Imagem", 2048);
 
-        // Calcular tamanho total da pasta "Documents"
-        long tamanhoDocuments = documents.calcularTamanho();
-        System.out.println("Tamanho total da pasta Documents: " + tamanhoDocuments + " bytes");
+            long tamanhoDocuments = documents.calcularTamanho();
+            System.out.println("Tamanho total da pasta Documents: " + tamanhoDocuments + " bytes");
 
-        // Excluir a pasta "Documents" e todos os seus arquivos e subpastas
-        documents.excluir();
+            documents.excluir();
+        } else {
+            System.out.println("Pasta Documents não encontrada.");
+        }
     }
 }
 //na main o disco virtual é de fato usado criando um objeto Disco chamado "gdrive"

@@ -10,6 +10,8 @@ class Arquivo {
     }
 
     public getTamanho(): number {
+        console.log("Nome do arquivo: " + this.nome);
+        console.log("Tipo do arquivo: " + this.tipo);
         return this.tamanho;
     }
 }
@@ -53,6 +55,15 @@ class Pasta {
         this.subpastas = [];
         this.arquivos = [];
     }
+
+    public getSubpasta(nome: string): Pasta | undefined {
+        for (const subpasta of this.subpastas) {
+            if (subpasta.nome === nome) {
+                return subpasta;
+            }
+        }
+        return undefined;
+    }
 }
 
 class Disco {
@@ -62,6 +73,10 @@ class Disco {
     constructor(nome: string) {
         this.nome = nome;
         this.raiz = new Pasta("Raiz");
+    }
+
+    public getNome(): string {
+        return this.nome;
     }
 
     public criarPasta(nome: string): void {
@@ -79,26 +94,29 @@ class Disco {
     public excluir(): void {
         this.raiz.excluir();
     }
+
+    public getRaiz(): Pasta {
+        return this.raiz;
+    }
 }
 
 const gdrive: Disco = new Disco("GDrive");
 
-// Criar pastas
 gdrive.criarPasta("Documents");
 gdrive.criarPasta("Pictures");
 
-// Criar subpastas
-const documents: Pasta = gdrive.getRaiz().getSubpasta("Documents");
-documents.criarPasta("Work");
-documents.criarPasta("Personal");
+const documents: Pasta | undefined = gdrive.getRaiz().getSubpasta("Documents");
+if (documents) {
+    documents.criarPasta("Work");
+    documents.criarPasta("Personal");
 
-// Criar arquivos
-documents.criarArquivo("Report.docx", "Documento", 1024);
-documents.criarArquivo("Image.jpg", "Imagem", 2048);
+    documents.criarArquivo("Report.docx", "Documento", 1024);
+    documents.criarArquivo("Image.jpg", "Imagem", 2048);
 
-// Calcular tamanho total da pasta "Documents"
-const tamanhoDocuments: number = documents.calcularTamanho();
-console.log("Tamanho total da pasta Documents: " + tamanhoDocuments + " bytes");
+    const tamanhoDocuments: number = documents.calcularTamanho();
+    console.log("Tamanho total da pasta Documents: " + tamanhoDocuments + " bytes");
 
-// Excluir a pasta "Documents" e todos os seus arquivos e subpastas
-documents.excluir();
+    documents.excluir();
+} else {
+    console.log("Pasta Documents não encontrada.");
+}
